@@ -62,8 +62,6 @@ const Scan = () => {
       {change ? (
         <Fragment>
           <Button
-            variant="contained"
-            color="secondary"
             onClick={onScanFile}
             variant="primary"
             className="mb-3">
