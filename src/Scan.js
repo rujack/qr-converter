@@ -28,6 +28,15 @@ const Scan = () => {
     console.error(err);
   };
 
+  const changeTab = () => {
+    if (change) {
+      setChange(false);
+    } else {
+      setChange(true);
+    }
+    setResult("");
+  };
+
   return (
     <Container className="my-4">
       <Nav
@@ -38,18 +47,14 @@ const Scan = () => {
         <Nav.Item>
           <Nav.Link
             eventKey="scan-file"
-            onClick={() => {
-              setChange(true) + setResult("");
-            }}>
+            onClick={changeTab}>
             File
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link
             eventKey="scan-cam"
-            onClick={() => {
-              setChange(false) + setResult("");
-            }}>
+            onClick={changeTab}>
             Camera
           </Nav.Link>
         </Nav.Item>
