@@ -1,8 +1,9 @@
 import React, { useState, useRef, Fragment } from "react";
 import { Container, Button, Nav } from "react-bootstrap";
-import QrReader from "react-qr-reader";
+import QrReader from "modern-react-qr-reader";
 
 const Scan = () => {
+  const [errorr, setErrorr] = useState("");
   const [result, setResult] = useState("");
   const [change, setChange] = useState(true);
   const qrRef = useRef(null);
@@ -25,6 +26,7 @@ const Scan = () => {
     }
   };
   const handleError = (err) => {
+    setErrorr(err.message)
     console.error(err);
   };
 
@@ -45,27 +47,20 @@ const Scan = () => {
         className="mb-3"
         style={{ color: "" }}>
         <Nav.Item>
-          <Nav.Link
-            eventKey="scan-file"
-            onClick={changeTab}>
+          <Nav.Link eventKey="scan-file" onClick={changeTab}>
             File
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link
-            eventKey="scan-cam"
-            onClick={changeTab}>
+          <Nav.Link eventKey="scan-cam" onClick={changeTab}>
             Camera
           </Nav.Link>
         </Nav.Item>
       </Nav>
       {change ? (
         <Fragment>
-          <Button
-            onClick={onScanFile}
-            variant="primary"
-            className="mb-3">
-            Upload Qr Code <i class="fas fa-upload"></i>
+          <Button onClick={onScanFile} variant="primary" className="mb-3">
+            Upload Qr Code <i className="fas fa-upload"></i>
           </Button>
           <div className="mx-5">
             <QrReader
@@ -80,6 +75,7 @@ const Scan = () => {
         </Fragment>
       ) : (
         <div className="mx-5">
+          {errorr && <p className="mb-3">{errorr}</p>}
           <QrReader
             delay={300}
             onError={handleError}
